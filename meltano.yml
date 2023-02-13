@@ -17,6 +17,15 @@ environments:
           database: ${USER}_meltano
           add_metadata_columns: 'True'
           host: localhost
+      transformers:
+      - name: dbt-postgres
+        config:
+          host: localhost
+          user: ${USER}
+          password: ${TARGET_POSTGRES_PASSWORD}
+          port: 5432
+          dbname: ${USER}_meltano
+          schema: analytics
 - name: staging
 - name: prod
 plugins:
@@ -39,3 +48,7 @@ plugins:
   - name: target-postgres
     variant: meltanolabs
     pip_url: git+https://github.com/MeltanoLabs/target-postgres.git
+  transformers:
+  - name: dbt-postgres
+    variant: dbt-labs
+    pip_url: dbt-core~=1.3.0 dbt-postgres~=1.3.0
