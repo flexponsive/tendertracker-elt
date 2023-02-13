@@ -13,8 +13,8 @@ environments:
       loaders:
       - name: target-postgres
         config:
-          user: hinnerk
-          database: hinnerk_meltano
+          user: ${USER}
+          database: ${USER}_meltano
           add_metadata_columns: 'True'
           host: localhost
 - name: staging
