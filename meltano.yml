@@ -3,5 +3,39 @@ default_environment: dev
 project_id: 22ace01c-276b-4bda-b1aa-328d66554d4c
 environments:
 - name: dev
+  config:
+    plugins:
+      extractors:
+      - name: tap-eu-ted
+        config:
+          query: RC=[EST]
+          scope: 2
+      loaders:
+      - name: target-postgres
+        config:
+          user: hinnerk
+          database: hinnerk_meltano
+          add_metadata_columns: 'True'
+          host: localhost
 - name: staging
 - name: prod
+plugins:
+  extractors:
+  - name: tap-eu-ted
+    namespace: tap_eu_ted
+    pip_url: -e ../tap-eu-ted
+    executable: tap-eu-ted
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: query
+    - name: scope
+      kind: integer
+    - name: max_pages
+      kind: integer
+  loaders:
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-postgres.git

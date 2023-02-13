@@ -1,0 +1,97 @@
+{
+  "plugin_type": "loaders",
+  "name": "target-postgres",
+  "namespace": "target_postgres",
+  "variant": "meltanolabs",
+  "label": "Postgres",
+  "docs": "https://hub.meltano.com/loaders/target-postgres--meltanolabs",
+  "repo": "https://github.com/MeltanoLabs/target-postgres",
+  "pip_url": "git+https://github.com/MeltanoLabs/target-postgres.git",
+  "description": "PostgreSQL database loader",
+  "logo_url": "https://hub.meltano.com/assets/logos/loaders/postgres.png",
+  "capabilities": [
+    "about",
+    "stream-maps",
+    "schema-flattening"
+  ],
+  "settings_group_validation": [
+    []
+  ],
+  "settings": [
+    {
+      "name": "host",
+      "kind": "string",
+      "label": "Host",
+      "description": "Hostname for postgres instance. Note if sqlalchemy_url is set this will be ignored."
+    },
+    {
+      "name": "port",
+      "kind": "integer",
+      "label": "Port",
+      "description": "The port on which postgres is awaiting connection. Note if sqlalchemy_url is set this will be ignored. Defaults to 5432"
+    },
+    {
+      "name": "user",
+      "kind": "string",
+      "label": "User",
+      "description": "User name used to authenticate. Note if sqlalchemy_url is set this will be ignored.\n"
+    },
+    {
+      "name": "password",
+      "kind": "password",
+      "label": "Password",
+      "description": "Password used to authenticate. Note if sqlalchemy_url is set this will be ignored."
+    },
+    {
+      "name": "database",
+      "kind": "string",
+      "label": "Database",
+      "description": "Database name. Note if sqlalchemy_url is set this will be ignored."
+    },
+    {
+      "name": "sqlalchemy_url",
+      "kind": "string",
+      "label": "Sqlalchemy Url",
+      "description": "SQLAlchemy connection string. This will override using host, user, password, port,dialect. Note that you must esacpe password specialcharacters properly seehttps://docs.sqlalchemy.org/en/20/core/engines.html#escaping-special-characters-such-as-signs-in-passwords"
+    },
+    {
+      "name": "dialect+driver",
+      "kind": "string",
+      "label": "Dialect+Driver",
+      "description": "Dialect+driver see https://docs.sqlalchemy.org/en/20/core/engines.html. Generally just leave this alone. Note if sqlalchemy_url is set this will be ignored."
+    },
+    {
+      "name": "default_target_schema",
+      "kind": "string",
+      "value": "$MELTANO_EXTRACT__LOAD_SCHEMA",
+      "label": "Default Target Schema",
+      "description": "Postgres schema to send data to, example: tap-clickup"
+    },
+    {
+      "name": "stream_maps",
+      "kind": "object",
+      "label": "Stream Maps",
+      "description": "Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html)."
+    },
+    {
+      "name": "stream_map_config",
+      "kind": "object",
+      "label": "Stream Map Config",
+      "description": "User-defined config values to be used within map expressions."
+    },
+    {
+      "name": "flattening_enabled",
+      "kind": "boolean",
+      "label": "Flattening Enabled",
+      "description": "'True' to enable schema flattening and automatically expand nested properties."
+    },
+    {
+      "name": "flattening_max_depth",
+      "kind": "integer",
+      "label": "Flattening Max Depth",
+      "description": "The max depth to flatten schemas."
+    }
+  ],
+  "dialect": "postgres",
+  "target_schema": "$TARGET_POSTGRES_SCHEMA"
+}
